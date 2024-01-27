@@ -21,7 +21,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
         #region Métodos Sincronos
 
         [HttpPost]
-        public IActionResult Insert(CustomersDto customersDto)
+        public IActionResult Insert([FromBody] CustomersDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
@@ -32,7 +32,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(CustomersDto customersDto)
+        public IActionResult Update([FromBody] CustomersDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
@@ -78,7 +78,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
         #region Métodos Asíncronos
 
         [HttpPost]
-        public async Task<IActionResult> InsertAsync(CustomersDto customersDto)
+        public async Task<IActionResult> InsertAsync([FromBody] CustomersDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
@@ -90,7 +90,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
 
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(CustomersDto customersDto)
+        public async Task<IActionResult> UpdateAsync([FromBody] CustomersDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
