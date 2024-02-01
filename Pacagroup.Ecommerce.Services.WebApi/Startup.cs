@@ -15,9 +15,12 @@ using Pacagroup.Ecommerce.Infraestructura.Interface;
 using Pacagroup.Ecommerce.Infraestructura.Repository;
 using Pacagroup.Ecommerce.Transversal.Common;
 using Pacagroup.Ecommerce.Transversal.Mapper;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Pacagroup.Ecommerce.Services.WebApi
@@ -44,6 +47,31 @@ namespace Pacagroup.Ecommerce.Services.WebApi
             services.AddScoped<ICustomersApplication, CustomersApplication>();
             services.AddScoped<ICustomersDomain, CustomersDomain>();
             services.AddScoped<ICustomersRepository, CustomersRepository>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Pacagroup technology service API Market",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = "none",
+                    Contact = new Contact
+                    {
+                        Name = "Andres Camilo Ferreira Rodriguez",
+                        Email = "ac.ferreira.r@gmail.com",
+                        Url = "https://github.com/AndresFerreiraR/BusinessArchitecture/blob/develop/README.md"
+                    },
+                    License = new License
+                    {
+                        Name = "Use under LICX",
+                        Url = "http://google.com.co"
+                    }
+                });
+                var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlfile);
+                c.IncludeXmlComments(xmlpath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +81,14 @@ namespace Pacagroup.Ecommerce.Services.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API Ecommerce V1");
+            });
 
             app.UseMvc();
         }
