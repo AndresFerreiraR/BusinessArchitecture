@@ -33,11 +33,17 @@ namespace Pacagroup.Ecommerce.Services.WebApi
         }
 
         public IConfiguration Configuration { get; }
+        public string myPolicy = "PolicyApiEcommerce";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(x => x.AddProfile(new MappingsProfile()));
+
+            services.AddCors(options => options.AddPolicy(myPolicy, builder => builder.WithOrigins(Configuration["Config:OriginCors"])
+                                                                                       .AllowAnyHeader()
+                                                                                       .AllowAnyMethod()));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => { options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver(); });
 
@@ -89,6 +95,8 @@ namespace Pacagroup.Ecommerce.Services.WebApi
 
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API Ecommerce V1");
             });
+
+            app.UseCors(myPolicy);
 
             app.UseMvc();
         }

@@ -686,3 +686,41 @@ Una aplicacion basado en una arquitectura N-Capas mejora considerablemente la ca
 
   2. Se debe crear el proyecto.
 
+## Capa de dominio ##
+
+Ver los pull realizados al reposiotiro en la rama de develop
+
+## Capa de Alicacion ##
+
+Ver los pull realizados al reposiotiro en la rama de develop
+
+## Capa de Servicio ##
+
+Ver los pull realizados al reposiotiro en la rama de develop
+
+  • Swagger y OpenApi => 
+
+      • ¿Que es IpenAPI?
+
+        La especificacion de Open API es un formado de descripcion para REST. Un archivo OpenAPI permite describir una API de manera complera incluyendo la informacion del endpoint
+        incluyendo parametros de entrada y salida para cada endpoint y permite conocer los metodos de autenticacion de la API a consumir, por ultimo permite conocer la informacion
+        del contacto, licencia, terminos de uso.
+
+      • ¿Que es Swagger?
+
+        Es un conjunto de herramientas de codigo abierto creadas al rededor de la especificacion OpenAPI que ayuda a diseñar, construir, documentar y consumir un API Rest
+
+  • CORS => 
+
+    • Contexto => 
+      • La seguridad el navegador impide que una pagina web realice solicitudes a un dominio diferente. Esta restriccion se llama politica del mismo origen.
+      • La politica del mismo origen impide que un sutio malicioso lea datos confidenciales de otro sitio.
+      • En muchos casos es posible que sea necesario permitir que otros sitios realicen solicitudes del origen cruzado a su aplicacion (Ejemplo: cuando se exponen API's).
+
+    • CORS
+      • Es un estandar W3C que permite a un servidor flexibilizar la politica del mismo origen.
+      • Permite que un servidor habilite explicitamente algunas solicitudes de origen cruzado mientras rechaza otras.
+      • Es mas seguro y mas flexible que las tecnicas anteriores como JSONP.
+      • No es una caracteristica de seguridad, CORS flexibiliza la seguridad. Una API no es mas segura al permitir CORS.
+
+    
