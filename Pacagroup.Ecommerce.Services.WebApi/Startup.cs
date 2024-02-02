@@ -13,6 +13,7 @@ using Pacagroup.Ecommerce.Domain.Interface;
 using Pacagroup.Ecommerce.Infraestructura.Data;
 using Pacagroup.Ecommerce.Infraestructura.Interface;
 using Pacagroup.Ecommerce.Infraestructura.Repository;
+using Pacagroup.Ecommerce.Services.WebApi.Helpers;
 using Pacagroup.Ecommerce.Transversal.Common;
 using Pacagroup.Ecommerce.Transversal.Mapper;
 using Swashbuckle.AspNetCore.Swagger;
@@ -47,12 +48,19 @@ namespace Pacagroup.Ecommerce.Services.WebApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options => { options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver(); });
 
+            var appSettingsSection = Configuration.GetSection("Config");
+
+            services.Configure<AppSettings>(appSettingsSection);
+
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddSingleton<IConnectionFactory, ConnectionFactory>();
             services.AddScoped<ICustomersApplication, CustomersApplication>();
+            services.AddScoped<IUsersApplication, UsersApplication>();
             services.AddScoped<ICustomersDomain, CustomersDomain>();
+            services.AddScoped<IUsersDomain, UsersDomain>();
             services.AddScoped<ICustomersRepository, CustomersRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
 
             services.AddSwaggerGen(c =>
             {
@@ -97,6 +105,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi
             });
 
             app.UseCors(myPolicy);
+            app.UseAuthentication();
 
             app.UseMvc();
         }

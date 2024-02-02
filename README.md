@@ -723,4 +723,36 @@ Ver los pull realizados al reposiotiro en la rama de develop
       • Es mas seguro y mas flexible que las tecnicas anteriores como JSONP.
       • No es una caracteristica de seguridad, CORS flexibiliza la seguridad. Una API no es mas segura al permitir CORS.
 
-    
+  • JWT (JASON WEB TOKEN)
+
+    • Que es un Token? : Es una cadena alfanumerica con caracteres aparentemente aleatorios, como el siguiente: eyJhBGSJDHKksjdhfiuwerjnUKSHDkaaskdfKAJSHdjksdfkasjfnKJASHfkjasdfwweflaskcnadfas
+      o como el siguiente 123456
+
+      Estas cadenas de texto, aparentemente no tienen un significado, sin embargo tiene un significado real para el servidor o institucion que lo emitió y ademas pueden entender y así validar al usuario 
+      que intenta acceder a la informacion. Un token pude tener datos adicionales.
+
+    • Que son los JSON Web tokens (JWT)
+      Podemos decir que los JWT son un tipo de token el cual engloba una estructura, la cual puede ser desencriptada por el sevidor y de esta forma, autenticarnos como usuario en la aplicacion.
+
+        • Estructura de un JWT (3 secciones separadas por un punto)
+          iugIGIhlkjhiuGIkhliuHIUGluiHlkhlIHl.yUKJBSIiuiausiuHuihIHsuibiNkjIUhihsbiUHIh.iuihiNIUhiUGbgTYfBkJtFugikguiyfgBJgiUGi
+          
+          Header (primera parte): Contiene el tipo de token y el algoritmo de encriptamiento.
+          Payload (segunda parte): Contiene los datos que identifican al usuario (Id,Nombre,etc)
+          Firma (tercera parte): Es la firma digital, la cual se genera con las secciones anteriores y sirve para validar que el contenido no haya sido alterado. (header y payload en base64 y despues encriptado)
+      
+        • Como se usan JWT
+
+          • Los JWT se utilizan para autenticar a los usuarios, para ello, el usuario requiere de un login tradicional como es el usuario y password.
+          • Una vez, que el sistema de backend valida que el usuario y la contraseña  son correctas, este retornara un token al usuario.
+          • El Token lo debera guardar el cliente, pues de aqui en adelante todas las peticiones que realice al servidor, deberá llevar el token.
+          • El token por lo general es almacenado en cookies o en el localstorage del navegador, y cuando se requiere enviar un request al sevidor, se recupere y se envua como header.
+
+        • Ciclo de vida de un token
+
+          • El usaurio requiere una autenticacion tradicional con el servidor, es decir, usuario y password.
+          • El servidor valida que los datos introducidos sean correctos y generara un token.
+          • El servidor enviara el token al usuario y este lo tendra que almacenar de cualquier forma.
+          • una vez con el token el usuario realiza una peticion al servidor, enviando en el header el token.
+          • El servidor validara que el token sea correcto, desencriptandolo mediante la mmisma llave que utilizo para encriptarlo.
+          • Si el token es correcto, entonces el servidor retornara los datos solicitados.
