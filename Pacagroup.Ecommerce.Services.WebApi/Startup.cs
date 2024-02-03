@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Pacagroup.Ecommerce.Application.Interface;
 using Pacagroup.Ecommerce.Application.Main;
 using Pacagroup.Ecommerce.Domain.Core;
@@ -22,6 +24,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Pacagroup.Ecommerce.Services.WebApi
@@ -52,6 +55,8 @@ namespace Pacagroup.Ecommerce.Services.WebApi
 
             services.Configure<AppSettings>(appSettingsSection);
 
+            var appSettings = appSettingsSection.Get<AppSettings>();
+
             services.AddSingleton<IConfiguration>(Configuration);
 
             services.AddSingleton<IConnectionFactory, ConnectionFactory>();
@@ -61,6 +66,48 @@ namespace Pacagroup.Ecommerce.Services.WebApi
             services.AddScoped<IUsersDomain, UsersDomain>();
             services.AddScoped<ICustomersRepository, CustomersRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var Issuer = appSettings.Issuer;
+            var Audience = appSettings.Audience;
+
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+                {
+                    x.Events = new JwtBearerEvents
+                    {
+                        OnTokenValidated = context =>
+                        {
+                            var userId = int.Parse(context.Principal.Identity.Name);
+                            return Task.CompletedTask;
+                        },
+
+                        OnAuthenticationFailed = context =>
+                        {
+                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                            {
+                                context.Response.Headers.Add("Token-Expired", "true");
+                            }
+                            return Task.CompletedTask;
+                        }
+                    };
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = false;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidIssuer = Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = Audience,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+
 
             services.AddSwaggerGen(c =>
             {
@@ -85,6 +132,19 @@ namespace Pacagroup.Ecommerce.Services.WebApi
                 var xmlfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlfile);
                 c.IncludeXmlComments(xmlpath);
+
+                c.AddSecurityDefinition("Authorization", new ApiKeyScheme
+                {
+                    Description = "Authorization by API key",
+                    In = "header",
+                    Type = "apiKey",
+                    Name = "Authorization"
+                });
+
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Authorization", new string[0]}
+                });
             });
         }
 
