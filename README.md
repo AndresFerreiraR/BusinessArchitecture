@@ -760,3 +760,17 @@ Ver los pull realizados al reposiotiro en la rama de develop
   ## Actualizacion A .NET Core 3.0 ##
 
   Ver actualizacion en el repo.
+
+    ## Metricas de calidad de codigo ##
+
+    1. Metricas de codigo
+
+      • Las metricas de codigo son un conjunto de metricas de software que brindan a los desarrolladores una mejor comprension del codigo  que estan desarrollando.
+      • Al Aprovahcar las metricas de codigo los desarrolladores puden comprender que clases y/o metodos deben refactorizar o realizas pruebas mas a fondo.
+      • Los equipos de desarrollo pueden identificar riesgos potenciales, comprender el estado actual de un proyecto y realizar y realizar un seguimiento del proceso durante el desarrolo de software
+
+        • Visual Studio a partir de la version 2019 calcula las metricas de codigo
+          • Ciclomatic complexity
+          • Depth of inheritance
+          • Class coupling
+          • Line of code.
