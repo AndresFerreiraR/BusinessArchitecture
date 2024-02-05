@@ -837,3 +837,7 @@ Ver repositorio
 ## Actualizacion a .Net 5 ##
 
 ver repositorio
+
+## Creacion de reglas de validacion con FluentValidation ##
+
+  Ver repositoio
