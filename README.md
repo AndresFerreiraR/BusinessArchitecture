@@ -761,7 +761,7 @@ Ver los pull realizados al reposiotiro en la rama de develop
 
   Ver actualizacion en el repo.
 
-    ## Metricas de calidad de codigo ##
+  ## Metricas de calidad de codigo ##
 
     1. Metricas de codigo
 
@@ -770,7 +770,29 @@ Ver los pull realizados al reposiotiro en la rama de develop
       • Los equipos de desarrollo pueden identificar riesgos potenciales, comprender el estado actual de un proyecto y realizar y realizar un seguimiento del proceso durante el desarrolo de software
 
         • Visual Studio a partir de la version 2019 calcula las metricas de codigo
-          • Ciclomatic complexity
-          • Depth of inheritance
-          • Class coupling
-          • Line of code.
+          • Maintainability index (indice de mantenibilidad).
+              Calcula un valor de indice entre 0 a 100, lo cual representa  la relativa facilidad de mantener el codigo. Un valor alto significa uma mejor mantenibilidad del codigo.
+                0-9 ROJO
+                10-19 AMARILLO
+                20-100 VERDE
+
+          • Ciclomatic complexity (Complejidad ciclomatica).
+
+            Mide la complejidad estructural del código. Se obtiene calculando el numero de diferentes rutas de codigo en el flujo del programa. Un programa que tiene un flujo de control complejo requiere mas
+            pruebas para logar una buena cobertura de codigo y es menos mantenible.
+
+          • Depth of inheritance (profundidad de herencia).
+
+            Indica la cantidad de frases diferentes que se heredan entre si, hasta la clase base. La profundidad de herencia es similar al acoplamiento de clases en que un cambio en una clase base puede afectar
+            a cualquiera de sus calses heredadas. Cuanto mayor sea este numero, mayor sera la herencia y mayor sera la posibilidad de que las modificaciones de la clase base produzcan un cambio radical.
+
+          • Class coupling (Acoplamiento de clases).
+
+            Mide el acoplamiento a clases unicas a traves de parámetros, variables locales, tipos de retorno, llamadas a metodos, etc.
+          
+            Un buen diseño de software dicta que los tipos y metodos deben tener una alta cohesion y un bajo acoplamiento. El alto acomplamiento indica un diseño que es dificil de reutilizar y mantener debido 
+            a sus muchas interdependencias con otros tipos.
+
+          • Line of code (Lineas de codigo).
+
+            Indica el numero exacto de lineas de codigo fuente que están presentes en su archivo fuente, incluso las lineas en blanco, estas metricas estan disponibles a partid de visual studio 2019
