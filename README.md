@@ -834,3 +834,6 @@ Ver repositorio
   Son metodos adicionales que permiten inyectar metodos adicionales sin modificar, derivar o recompilar la clase, estructura o interfaz original. Con la extensino ganamos mantenibilidad en el codigo y segmentar 
   funcionalidades en diversas clases que cumplan responsabilidades especificas siguiendo el orden de los principios solid.
 
+## Actualizacion a .Net 5 ##
+
+ver repositorio
