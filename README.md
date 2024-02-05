@@ -756,3 +756,7 @@ Ver los pull realizados al reposiotiro en la rama de develop
           • una vez con el token el usuario realiza una peticion al servidor, enviando en el header el token.
           • El servidor validara que el token sea correcto, desencriptandolo mediante la mmisma llave que utilizo para encriptarlo.
           • Si el token es correcto, entonces el servidor retornara los datos solicitados.
+
+  ## Actualizacion A .NET Core 3.0 ##
+
+  Ver actualizacion en el repo.

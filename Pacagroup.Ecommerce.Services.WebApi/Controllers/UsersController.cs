@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
 {
     [Authorize]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UsersController : Controller
     {
@@ -34,7 +34,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("Authenticate")]
         public IActionResult Authenticate([FromBody] UsersDto users)
         {
 
