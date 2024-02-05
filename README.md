@@ -823,4 +823,5 @@ Ver los pull realizados al reposiotiro en la rama de develop
 
           docker container run --name pacagroup.econmmerce -d -p 8050:80 3f754ad0bdf6
 
-          
+        • docker container logs <IdContenedor> => nos permite ver los logs de la aplicacion que esta corriendo sobre este contenedor.
+
