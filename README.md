@@ -825,3 +825,12 @@ Ver los pull realizados al reposiotiro en la rama de develop
 
         • docker container logs <IdContenedor> => nos permite ver los logs de la aplicacion que esta corriendo sobre este contenedor.
 
+## Actualizacion .Net Core 3.1 ##
+
+Ver repositorio
+
+• Metodos de extension:
+
+  Son metodos adicionales que permiten inyectar metodos adicionales sin modificar, derivar o recompilar la clase, estructura o interfaz original. Con la extensino ganamos mantenibilidad en el codigo y segmentar 
+  funcionalidades en diversas clases que cumplan responsabilidades especificas siguiendo el orden de los principios solid.
+
