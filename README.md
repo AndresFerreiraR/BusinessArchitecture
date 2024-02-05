@@ -796,3 +796,31 @@ Ver los pull realizados al reposiotiro en la rama de develop
           • Line of code (Lineas de codigo).
 
             Indica el numero exacto de lineas de codigo fuente que están presentes en su archivo fuente, incluso las lineas en blanco, estas metricas estan disponibles a partid de visual studio 2019
+
+## DOCKER ##
+
+  Docker es una plataforma de software que le permite crear, probar e implementar aplicaciones rápidamente. Docker empaqueta software en unidades estandarizadas llamadas contenedores que incluyen todo lo necesario para que el software se ejecute, incluidas bibliotecas, herramientas de sistema, código y tiempo de ejecución. Con Docker, puede implementar y ajustar la escala de aplicaciones rápidamente en cualquier entorno con la certeza de saber que su código se ejecutará.
+
+  Docker le proporciona una manera estándar de ejecutar su código. Docker es un sistema operativo para contenedores. De manera similar a cómo una máquina virtual virtualiza (elimina la necesidad de administrar directamente) el hardware del servidor, los contenedores virtualizan el sistema operativo de un servidor.
+
+  Docker fue creado por desarrolladores y para desarrolladores. Brinda estabilidad al entorno: un contenedor en la máquina de desarrollo funcionará exactamente igual en el escenario, la producción o cualquier otro entorno. Esto elimina el problema de varias versiones de programas en diferentes entornos
+
+    • Algunos comandos
+
+      • Docker version => nos permite conocer la version de docker instalada y el motor (engine) sobre el cual esta corriendo.
+      • Docker image ls => nos permite listar las imagenes dispobibles en el equipo.
+      • Docker image build -t <nombreImagen:version> -f <directorioDockerFile> <DirectorioDeLaSolucion>
+          Ejemplo "docker image build -t pacagroup.ecommerce:1.0.0 -f .\Pacagroup.Ecommerce.Services.WebApi\Dockerfile ."
+          Se crea una imagen llamada pacagroup.ecommerce:1.0.0 ejecutando el docker file en la ruta .\Pacagroup.Ecommerce.Services.WebApi\Dockerfile y se especifica el directorio de la solucion, se coloca . al estar en la raiz del directorio
+      • Docker image rm -f <IdImagen> => nos permite borrar una imagen por Id
+
+      Creacion del contenedor docker a partir de una imagen.
+
+        • docker container ls => Este comando nos permite listar los contenedores.
+        • docker container run --name <NombreDelContenedor> -d -p <puerto>:<Puerto> <IdDeLaImagen> => nos permite crear un contenedro
+          asignarle un nombre con --nambe, con -d idicamos que el contenedor se ejeucte en segundo plano con la opcion -p establecemos
+          los puertos en el contenedor primer puerto para acceder al contenedor desde docker host y el segundo puerto es el interno del contenedor seguido con el id de la imagen ejemplo
+
+          docker container run --name pacagroup.econmmerce -d -p 8050:80 3f754ad0bdf6
+
+          
