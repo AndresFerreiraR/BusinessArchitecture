@@ -4,6 +4,7 @@ namespace Pacagroup.Ecommerce.Application.Main
     using AutoMapper;
     using Pacagroup.Ecommerce.Application.DTO;
     using Pacagroup.Ecommerce.Application.Interface;
+    using Pacagroup.Ecommerce.Application.Validator;
     using Pacagroup.Ecommerce.Domain.Interface;
     using Pacagroup.Ecommerce.Transversal.Common;
     using System;
@@ -14,20 +15,27 @@ namespace Pacagroup.Ecommerce.Application.Main
 
         private readonly IUsersDomain _usersDomain;
         private readonly IMapper _mapper;
-        public UsersApplication(IUsersDomain usersDomain, IMapper mapper)
+        private readonly UsersDtoValidator _userDtoValidator;
+        public UsersApplication(IUsersDomain usersDomain, IMapper mapper, UsersDtoValidator userDtoValidator)
         {
             _usersDomain = usersDomain;
             _mapper = mapper;
+            _userDtoValidator = userDtoValidator;
         }
 
 
         public Response<UsersDto> Authenticate(string userName, string password)
         {
             var response = new Response<UsersDto>();
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            var validation = _userDtoValidator.Validate(new UsersDto() 
             {
-                response.Message = "Parameters cannot be empty";
-
+                UserName = userName,
+                Password = password
+            });
+            if (!validation.IsValid)
+            {
+                response.Message = "validation errors";
+                response.Errors = validation.Errors;
                 return response;
             }
             try
