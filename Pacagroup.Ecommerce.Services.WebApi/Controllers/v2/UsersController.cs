@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("2.0")]
     public class UsersController : Controller

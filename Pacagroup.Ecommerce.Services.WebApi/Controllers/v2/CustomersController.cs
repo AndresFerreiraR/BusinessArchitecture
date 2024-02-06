@@ -9,7 +9,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
     using System.Threading.Tasks;
 
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("2.0")]
     public class CustomersController : Controller
