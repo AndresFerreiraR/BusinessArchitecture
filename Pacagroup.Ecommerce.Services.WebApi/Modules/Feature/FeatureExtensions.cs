@@ -16,7 +16,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.Feature
                                                                                            .AllowAnyHeader()
                                                                                            .AllowAnyMethod()));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc();
 
 
             return services;

@@ -893,3 +893,7 @@ ver repositorio
     • Los metodos de prueba no deberían tener parametros.
     • Los metodos de prueba deben ser de tipo void.
     • Finalmente se debe tener en cuenta que una prueba unitaria solo debe probar una funcionalidad especifica, si tu prueba se complica por los distintos flujos que se tienen que probar, quiere decir, que el metodo bajo prueba no sigue el principio de responsabilidad unica,
+
+## Actualizacion .NET 6 ##
+
+ver repositorio

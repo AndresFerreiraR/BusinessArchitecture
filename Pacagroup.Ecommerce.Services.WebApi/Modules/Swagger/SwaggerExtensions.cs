@@ -6,7 +6,8 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.Swagger
     using System.IO;
     using System.Reflection;
     using System;
-
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using System.Collections.Generic;
 
     public static class SwaggerExtensions
     {
@@ -36,27 +37,26 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.Swagger
                 var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlfile);
                 c.IncludeXmlComments(xmlpath);
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                var securityScheme = new OpenApiSecurityScheme
                 {
-                    Description = "Authorization by API key",
+                    Name = "Authorization",
+                    Description = "Enter JWT Bearer token **_only_**",
                     In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Name = "Authorization"
-                });
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        new string[]{ }
-                    }
+                    {securityScheme, new List<string>(){ } }
                 });
             });
 
