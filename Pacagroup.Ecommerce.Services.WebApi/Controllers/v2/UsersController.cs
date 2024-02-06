@@ -15,11 +15,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
+namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
 {
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("2.0")]
     public class UsersController : Controller
     {
 
@@ -66,7 +67,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
                 {
                     new Claim(ClaimTypes.Name, usersDto.Data.UserId.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 Issuer = _appSettings.Issuer,
                 Audience = _appSettings.Audience,

@@ -897,3 +897,38 @@ ver repositorio
 ## Actualizacion .NET 6 ##
 
 ver repositorio
+
+## Control de versiones de un API en .NET 6 ##
+
+  1. ¿poequé es importante versionar un api?
+    
+    • El control de versiones de API es uno de los ingredientes mas importantes de una estrategia de api exitosa porque es uno de los puntos de contacto mas importates entre los proveedores de API y los consumidores de API.
+
+    • Como desarrolladores a medudo agregamos nuevas funcionalidades a nuesrtas aplicaciones y tambien modificamos las apis actuales, el control de versiones nos permite:
+      • Agregar de forma segura nuevas funciones sin interumpir procesos de trabajo actuales
+      • Cuando es el mejor mometo para hacerlo.
+
+  2. Proceso para versionar un API
+    2.1 Entender porque
+      • API: "una promesa de realizar los servicios descritos cuando se le solicite de manera especifica"
+        • Un contrato nunca debe ser roto unilateralmente por ninguna de las partes y las consecuencias de ello serán siempre negativas
+        • Un control de version de api deficiente conducira a la insestabilidad y provocara fricciones con nuestros consumidores de api; al contrario, un control de versiones de api solido conducira a la estabilidad y mejora de la experiencia del desarrollador.
+    2.2 Saber cuando
+      • Las Apis son contratos vivos y deberian poder crecer y mejorar de manera continua sin embargo esto no significa la ruptura del contrato continuamente. La clave esta en comprender que cambios implican la ruptura del contrato y cuales no. Recuerde, lo mas que le encantara a un consumidor de api es la estabilidad.
+      • ¿Que cambios no romperan un contrato API?
+      los cambios continuos tienden a ser aditivos: agregar nuevos campos o recursos anidados a sus representaciones de recursos, agregar nuevos puntos finales.
+      • ¿Que cambios romperan un contrato?
+        Los cambios importantes son cambios que requieren que el consumidor de la API realice adecuaciones para continuar consumiendo la API.
+        •Eliminar o cambiar el nombre de una ruta.
+        •Eliminar/renombrar parametros.
+        •Agurege una restruccion enun parametro (como isRequired)
+        •Eliminar/cambiar el nombre de un elemento (campo) de solicitud o respuesta.
+
+      La unica forma de minimizar las consecuencias es un plan de comunicacion solido para ayudar al consumidor de API a planificar cuando integrar la nueva version de API.
+    2.3 Saber como
+       Una vez que sabemos cuan importante  es el control de versiones de API y cuando hacerlo, es hora de decidir como implementarlo dentro de os principios REST
+      •Tipos de versiones de API
+        •Parametros de consulta (Query String).
+        •Encabezado personalizado (Header).
+        •Parametros en la URI (path).
+        

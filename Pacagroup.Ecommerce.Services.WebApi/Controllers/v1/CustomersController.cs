@@ -1,5 +1,5 @@
 ﻿
-namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
+namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v1
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -10,6 +10,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class CustomersController : Controller
     {
         private readonly ICustomersApplication _customersApplication;
