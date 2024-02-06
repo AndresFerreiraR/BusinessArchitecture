@@ -841,3 +841,55 @@ ver repositorio
 ## Creacion de reglas de validacion con FluentValidation ##
 
   Ver repositoio
+
+
+## Pruebas Unitarias ##
+
+  1. Definicion de las pruebas unitarias.
+
+    Las pruebas unitarias consiste en probar ciertas funciones o areas de nuestro codigo de forma aislada del resto. De esta forma se comprueba que ante una serue de entradas el resilado obtenido es el que se espera
+
+    Las pruebas unitarias deben ser automarizadas de forma que segun se va programando se va construyendo una bateria de pruebas que en un futuro nos aseguran que el codigo sigue funcionando tras modificaciones, refactorizaciones, mantenimiento, etc.
+
+    Se denominan pruebas unitarias porque descomponen las funciones de la aplicacion en comportamientos comprobables discretos que se pueden probar como unidades individuales
+
+  2. Caracteristicas de las pruebas unitarias.
+
+    • Deben ser automatizables
+    • Deben tener control sobre todo el codigo que se esta probando.
+    • se pueden ejecutar en cualquier orden (no debe depender de que se haya ejecutado otro test previamente).
+    • Se ejecuta en memoria (no requiere de disco duro, base de datos o servicios web).
+    • Devuelve siempre el mismo resultado.
+    • Se ejecuta rapidamente.
+    • Testea una unica funcionalidad.
+    • Es facil de leer y mantener
+    • puedes confiar en él (cuando ves un resultado no te hace falta depurar el codigo para asegurarse).
+
+  3. Requisitos de las clases de pruebas unitarias.
+
+     Los requisitos minimos para una calse de prueba en visaul studio .NET
+
+      • Atributo [TestClass]: Obligatirio en cualquier clase que mantenga metodos de pruena unitarios.
+      • El atributo [TestMethod]: Indica que un determinado metodo es una prueba unitaria.
+
+  4. Estructura de las pruebas unitarias.
+
+    Usualmente se usa el patron AAA (Arrange, Act, Assert).
+
+      • Arrange => donde se inicializan los objetos necesarios para la ejecucion del codigo
+      • Act => donde se ejecuta el metodo que se va a probar y se obtiene el resultado.
+      • Asset => Donde se comprueban que el resultado obtenido es el esperado.
+
+  5. Nombre de los metodos de las pruebas unitarias.
+
+  El nombre de la prueba unitaria debe representar lo que hace realmente la prueba, sin tener que revisar la prueba en si 
+
+  Se recomienda usar el formado: [Metodo]-[Escenario]-[ResultadoEsperado]
+  Ejemplo ProcesarRetiro_CuandoMotoEsMayorAlSaldo_SaldoInsuficiente
+
+  6. Recomendaciones.
+
+    • Al crear una clase de prueba, el nombre debe serguir el formato [NombreClase]Test: BanckTest, AccoutTest, etc
+    • Los metodos de prueba no deberían tener parametros.
+    • Los metodos de prueba deben ser de tipo void.
+    • Finalmente se debe tener en cuenta que una prueba unitaria solo debe probar una funcionalidad especifica, si tu prueba se complica por los distintos flujos que se tienen que probar, quiere decir, que el metodo bajo prueba no sigue el principio de responsabilidad unica,
