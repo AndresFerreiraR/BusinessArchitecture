@@ -981,4 +981,10 @@ ver repositorio
 
     La implementacion del patron repository puede ayudar a aislar si aplicacion de los cambios en las fuentes de datos y puede facilitar las pruebas unitarias automatizadas o el desarrollo basado en pruebas TDD.
 
+  2. ¿Que es el patron unit of work?
+
+    • Tiene como objetivo tratar como unidad todos aquellos objetos nuevos, modificados o eliminados con respecto de una fuente de datos.
+    • La implementacion del patron unit of work permite crentralizar las operaciones contra las fuetes de datos.
+    • el patron unit of work nos va a resultar muy util a la hora de persistir un conjunto de acciones a ejecutar sobre la base de datos, evitando el exceso de conexiones contra la misma.
+
     
