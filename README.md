@@ -931,4 +931,44 @@ ver repositorio
         •Parametros de consulta (Query String).
         •Encabezado personalizado (Header).
         •Parametros en la URI (path).
-        
+      A demas de decidir el tipo de versionamiento, tambien será necesario el formado del valor de la version.
+        • Versionado semántico como Major.Minor.Patch. por ejemplo 1.2.0
+        • version Major(principal) => cuando realiza cambios que rompen el contrato del api.
+        • version Minor (menor) => cuando agrega funcionalidad de manera compatible con versiones anteriores.
+        • version Patch => cuando realiza correciones de errores compatibles con versiones anteriores.
+
+    • Los valores MINIOR y PATCH son transparentes para el cliente y se utilizaran internamente.
+
+##  Patron health check ##
+
+  El patron health check es uno de los principales patrones que se utilizan para la observabilidad de los microservicios.
+
+  1. ¿Que es un healh check en ASP .Net Core?
+
+    Los health check o comprobadores de salud nos permite determinar el estado general y la disponibilidad de nuestra infraestructura de aplicaciones.
+
+    Los health check se exponen como endpoints HTTP y se pueden configurar para proporcionar informacion para varios ecenarios de monitoreo, como el tiempo de respuesta y el uso de memoria de nuestra aplicacion pude comunicarse con nuestro proveedor de base de datos.
+
+    • ASP .Net Core proporciona tres niveles diferentes de health check:
+      •Healthy (saludable): Nuestra aplicacion esta saludable y en un estado de funcionamiento normal.
+      •Degraded (Degradado): Nuestra aplicacion aun se esta ejecutando, pero no responde dentro del periodo de tiempo esperado.
+      •Unhealthy (En mal estado): Nuestra aplicacion no esta en buen estado y esta fuera de linea o se lanzo una excepcion no controlada al ejecutar la verificacion.
+
+  2. Tipos de Health check
+
+    • Basic health probes (pruebas basicas de salud): Estas comprobaciones basicas nos permiten determinar muy rapidamente si nuesrta aplicacion esta saludable o no.
+    • System (sistema): Brindan una gran cantidad de informacion como el almacenamiento en disco y el uso de memoria del host subyacente en el que se ejecuta nuestra aplicacion.
+    • Database (base de datos): Permite determinar si nuestro proveedor de base de datos esta en linea y si nuesrta aplicacion puede comunicarse con el correctamente, Esto puede ser cualquier cosa desde SQL Server, Postgres, Azure CosmosDB, y mucho mas.
+    • Customs (personalizadas): Permite comprobar un servicio de terceros o una API en la que se basa nuestra aplicacion, etc. Estos son mas generales y requieren que se escriba codigo personalizado para ejecutar las comprobaciones.
+
+  3. Definicion del patron health check
+
+    Contexto: A veces, una instancia de servicio puede ser incapaz de manejar solicitudes y aun así estar ejecutandose. Por ejemplo, es posible que se haya quedado sin conexion a la base de datos.
+
+    Problema ¿como detectar que una instancia de servicio en ejecucion no puede manejar solicitudes? 
+
+    Solucion: Los servicios deben implementar un Endpoint de verificacion de estado (por ejemplo, / health) que devuelve el estado de salud del servicio.
+
+    cuando usar:
+      • Se requiere genear una alerta cuando falla una instancia de servicio.
+      • Las solicitudes deben enrutarse a instancias de servicio en funcionamiento.
