@@ -972,3 +972,13 @@ ver repositorio
     cuando usar:
       • Se requiere genear una alerta cuando falla una instancia de servicio.
       • Las solicitudes deben enrutarse a instancias de servicio en funcionamiento.
+
+## Patron Repository y Unit of work en .Net 6 ##
+
+  1. ¿Que es el patron repository?
+
+    El patron repository esta destinado a crear una capa de abstraccion entre la capa de acceso a datos y la capa de logica empersarial de una aplicacion.
+
+    La implementacion del patron repository puede ayudar a aislar si aplicacion de los cambios en las fuentes de datos y puede facilitar las pruebas unitarias automatizadas o el desarrollo basado en pruebas TDD.
+
+    

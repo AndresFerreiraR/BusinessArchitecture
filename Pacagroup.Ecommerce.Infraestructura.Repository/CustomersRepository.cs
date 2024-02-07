@@ -1,8 +1,7 @@
 ﻿using Dapper;
 using Pacagroup.Ecommerce.Domain.Entity;
+using Pacagroup.Ecommerce.Infraestructura.Data;
 using Pacagroup.Ecommerce.Infraestructura.Interface;
-using Pacagroup.Ecommerce.Transversal.Common;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -12,11 +11,11 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
     public class CustomersRepository : ICustomersRepository
     {
 
-        private readonly IConnectionFactory _connectionFactory;
+        private readonly DapperContext _context;
 
-        public CustomersRepository(IConnectionFactory connectionFactory)
+        public CustomersRepository(DapperContext context)
         {
-            _connectionFactory = connectionFactory;
+            _context = context;
         }
 
 
@@ -24,7 +23,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public bool Insert(Customers customers)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersInsert";
 
@@ -49,7 +48,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public bool Update(Customers customers)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersUpdate";
 
@@ -74,7 +73,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public bool Delete(string customerId)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersDelete";
 
@@ -89,7 +88,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public Customers Get(string customerId)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersGetByID";
 
@@ -104,7 +103,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public IEnumerable<Customers> GetAll()
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersList";
                 var result = connection.Query<Customers>(query, commandType: CommandType.StoredProcedure);
@@ -119,7 +118,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public async Task<bool> InsertAsync(Customers customers)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersInsert";
 
@@ -143,7 +142,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
         }
         public async Task<bool> UpdateAsync(Customers customers)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersUpdate";
 
@@ -167,7 +166,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
         }
         public async Task<bool> DeleteAsync(string customerId)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersDelete";
 
@@ -181,7 +180,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
         }
         public async Task<Customers> GetAsync(string customerId)
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersGetByID";
 
@@ -195,7 +194,7 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
         }
         public async Task<IEnumerable<Customers>> GetAllAsync()
         {
-            using (var connection = _connectionFactory.GetConnection)
+            using (var connection = _context.CreateConnection())
             {
                 var query = "CustomersList";
                 var result = await connection.QueryAsync<Customers>(query, commandType: CommandType.StoredProcedure);
