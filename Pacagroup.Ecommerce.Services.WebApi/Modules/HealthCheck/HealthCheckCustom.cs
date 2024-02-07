@@ -1,0 +1,26 @@
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Pacagroup.Ecommerce.Services.WebApi.Modules.HealthCheck
+{
+    public class HealthCheckCustom : IHealthCheck
+    {
+        private readonly Random _random = new();
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        {
+            var responseTime = _random.Next(1, 300);
+
+            if (responseTime < 100)
+            {
+                return Task.FromResult(HealthCheckResult.Healthy("Healthy result from healthCheckCustom"));
+            }
+            else if (responseTime < 200)
+            {
+                return Task.FromResult(HealthCheckResult.Degraded("Defraded result from healthCheckCustom"));
+            }
+            return Task.FromResult(HealthCheckResult.Unhealthy("Unhealthy result from healthCheckCustom"));
+        }
+    }
+}
