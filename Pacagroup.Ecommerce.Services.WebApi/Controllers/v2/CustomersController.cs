@@ -38,7 +38,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         public IActionResult Update(string customerId, [FromBody] CustomersDto customersDto)
         {
             var validacion = _customersApplication.Get(customerId);
-            if(validacion.Data == null)
+            if (validacion.Data == null)
                 return NotFound(validacion.Data);
             if (customersDto == null)
                 return BadRequest();
@@ -74,6 +74,15 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         public IActionResult GetAll()
         {
             var response = _customersApplication.GetAll();
+            if (response.IsSuccess)
+                return Ok(response);
+            return BadRequest(response.Message);
+        }
+
+        [HttpGet("GetAllWithPagination")]
+        public IActionResult GetAllWithPagination([FromQuery] int pageNumber, int pageSize)
+        {
+            var response = _customersApplication.GetAllWithPagination(pageNumber, pageSize);
             if (response.IsSuccess)
                 return Ok(response);
             return BadRequest(response.Message);
@@ -135,6 +144,15 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         public async Task<IActionResult> GetAllAsync()
         {
             var response = await _customersApplication.GetAllAsync();
+            if (response.IsSuccess)
+                return Ok(response);
+            return BadRequest(response.Message);
+        }
+
+        [HttpGet("GetAllWithPaginationAsync")]
+        public async Task<IActionResult> GetAllWithPaginationAsync([FromQuery] int pageNumber, int pageSize)
+        {
+            var response = await _customersApplication.GetAllWithPaginationAsync(pageNumber, pageSize);
             if (response.IsSuccess)
                 return Ok(response);
             return BadRequest(response.Message);

@@ -41,6 +41,16 @@ namespace Pacagroup.Ecommerce.Domain.Core
             return _unitOfWork.Cutomers.GetAll();
         }
 
+        public IEnumerable<Customers> GetAllWithPagination(int pageNumber, int pageSize)
+        {
+            return _unitOfWork.Cutomers.GetAllWithPagination(pageNumber, pageSize);
+        }
+
+        public int Count()
+        {
+            return _unitOfWork.Cutomers.Count();
+        }
+
         #endregion
 
         #region Métodos Asíncronos
@@ -64,6 +74,16 @@ namespace Pacagroup.Ecommerce.Domain.Core
         public async Task<IEnumerable<Customers>> GetAllAsync()
         {
             return await _unitOfWork.Cutomers.GetAllAsync();
+        }
+
+        public async Task<IEnumerable<Customers>> GetAllWithPaginationAsync(int pageNumber, int pageSize)
+        {
+            return await _unitOfWork.Cutomers.GetAllWithPaginationAsync(pageNumber, pageSize);
+        }
+
+        public async Task<int> CountAsync()
+        {
+            return await _unitOfWork.Cutomers.CountAsync();
         }
 
         #endregion

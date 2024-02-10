@@ -987,4 +987,11 @@ ver repositorio
     • La implementacion del patron unit of work permite crentralizar las operaciones contra las fuetes de datos.
     • el patron unit of work nos va a resultar muy util a la hora de persistir un conjunto de acciones a ejecutar sobre la base de datos, evitando el exceso de conexiones contra la misma.
 
-    
+## Paginacion en ASP .NET Core 6 Web API ##
+
+  • ¿Que es paginacion de una Web Api?
+
+    • La funcionalidad de paginacion se refiere a obtener resultados parciales de una api.
+    • Imaginate tener millones de resultados en la base de datos y que su aplicacion intente devolverlos todos a la vez, No solo seria una forma extremadamente ineficaz de devolver los resultados, sino que tamnien podria tener efectos devastadores en la misma aplicacion o en el hardware en el que se ejecuta.
+    • Ademas se debe considerar que cada cliente tiene recursos en memoria limitados y necesita restringir la cantidad de resultados mostrados.
+    • por lo tanto necesitamos una forma de devolver un numero determinado de resultados al cliente para evitar estas consecuencias.

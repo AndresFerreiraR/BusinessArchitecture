@@ -23,93 +23,104 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
         public bool Insert(Customers customers)
         {
-            using (var connection = _context.CreateConnection())
-            {
-                var query = "CustomersInsert";
+            using var connection = _context.CreateConnection();
+            var query = "CustomersInsert";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("CustomerID", customers.CustomerId);
-                parameters.Add("CompanyName", customers.CompanyName);
-                parameters.Add("ContactName", customers.ContactName);
-                parameters.Add("ContactTitle", customers.ContactTitle);
-                parameters.Add("Address", customers.Address);
-                parameters.Add("City", customers.City);
-                parameters.Add("Region", customers.Region);
-                parameters.Add("PostalCode", customers.PostalCode);
-                parameters.Add("Country", customers.Country);
-                parameters.Add("Phone", customers.Phone);
-                parameters.Add("Fax", customers.Fax);
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", customers.CustomerId);
+            parameters.Add("CompanyName", customers.CompanyName);
+            parameters.Add("ContactName", customers.ContactName);
+            parameters.Add("ContactTitle", customers.ContactTitle);
+            parameters.Add("Address", customers.Address);
+            parameters.Add("City", customers.City);
+            parameters.Add("Region", customers.Region);
+            parameters.Add("PostalCode", customers.PostalCode);
+            parameters.Add("Country", customers.Country);
+            parameters.Add("Phone", customers.Phone);
+            parameters.Add("Fax", customers.Fax);
 
-                var result = connection.Execute(query, param: parameters, commandType: CommandType.StoredProcedure);
+            var result = connection.Execute(query, param: parameters, commandType: CommandType.StoredProcedure);
 
-                return result > 0;
-            }
+            return result > 0;
         }
 
         public bool Update(Customers customers)
         {
-            using (var connection = _context.CreateConnection())
-            {
-                var query = "CustomersUpdate";
+            using var connection = _context.CreateConnection();
+            var query = "CustomersUpdate";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("CustomerID", customers.CustomerId);
-                parameters.Add("CompanyName", customers.CompanyName);
-                parameters.Add("ContactName", customers.ContactName);
-                parameters.Add("ContactTitle", customers.ContactTitle);
-                parameters.Add("Address", customers.Address);
-                parameters.Add("City", customers.City);
-                parameters.Add("Region", customers.Region);
-                parameters.Add("PostalCode", customers.PostalCode);
-                parameters.Add("Country", customers.Country);
-                parameters.Add("Phone", customers.Phone);
-                parameters.Add("Fax", customers.Fax);
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", customers.CustomerId);
+            parameters.Add("CompanyName", customers.CompanyName);
+            parameters.Add("ContactName", customers.ContactName);
+            parameters.Add("ContactTitle", customers.ContactTitle);
+            parameters.Add("Address", customers.Address);
+            parameters.Add("City", customers.City);
+            parameters.Add("Region", customers.Region);
+            parameters.Add("PostalCode", customers.PostalCode);
+            parameters.Add("Country", customers.Country);
+            parameters.Add("Phone", customers.Phone);
+            parameters.Add("Fax", customers.Fax);
 
-                var result = connection.Execute(query, param: parameters, commandType: CommandType.StoredProcedure);
+            var result = connection.Execute(query, param: parameters, commandType: CommandType.StoredProcedure);
 
-                return result > 0;
-            }
+            return result > 0;
         }
 
         public bool Delete(string customerId)
         {
-            using (var connection = _context.CreateConnection())
-            {
-                var query = "CustomersDelete";
+            using var connection = _context.CreateConnection();
+            var query = "CustomersDelete";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("CustomerID", customerId);
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", customerId);
 
-                var result = connection.Execute(query, param: parameters, commandType: CommandType.StoredProcedure);
+            var result = connection.Execute(query, param: parameters, commandType: CommandType.StoredProcedure);
 
-                return result > 0;
-            }
+            return result > 0;
         }
 
         public Customers Get(string customerId)
         {
-            using (var connection = _context.CreateConnection())
-            {
-                var query = "CustomersGetByID";
+            using var connection = _context.CreateConnection();
+            var query = "CustomersGetByID";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("CustomerID", customerId);
+            var parameters = new DynamicParameters();
+            parameters.Add("CustomerID", customerId);
 
-                var result = connection.QuerySingle<Customers>(query, param: parameters, commandType: CommandType.StoredProcedure);
+            var result = connection.QuerySingle<Customers>(query, param: parameters, commandType: CommandType.StoredProcedure);
 
-                return result;
-            }
+            return result;
         }
 
         public IEnumerable<Customers> GetAll()
         {
-            using (var connection = _context.CreateConnection())
-            {
-                var query = "CustomersList";
-                var result = connection.Query<Customers>(query, commandType: CommandType.StoredProcedure);
+            using var connection = _context.CreateConnection();
+            var query = "CustomersList";
+            var result = connection.Query<Customers>(query, commandType: CommandType.StoredProcedure);
 
-                return result;
-            }
+            return result;
+        }
+
+        public IEnumerable<Customers> GetAllWithPagination(int pageNumber, int pageSize)
+        {
+            using var connection = _context.CreateConnection();
+            var query = "CustomersListWithPagination";
+            var parameters = new DynamicParameters();
+            parameters.Add("PageNumber", pageNumber);
+            parameters.Add("PageSize", pageSize);
+
+            var customers = connection.Query<Customers>(query, param: parameters, commandType: CommandType.StoredProcedure);
+            return customers;
+        }
+
+        public int Count()
+        {
+            using var connection = _context.CreateConnection();
+            var query = "SELECT COUNT(*) FROM Customers";
+
+            var count = connection.ExecuteScalar<int>(query, commandType: CommandType.Text);
+            return count;
         }
 
         #endregion
@@ -201,6 +212,27 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
 
                 return result;
             }
+        }
+
+        public async Task<IEnumerable<Customers>> GetAllWithPaginationAsync(int pageNumber, int pageSize)
+        {
+            using var connection = _context.CreateConnection();
+            var query = "CustomersListWithPagination";
+            var parameters = new DynamicParameters();
+            parameters.Add("PageNumber", pageNumber);
+            parameters.Add("PageSize", pageSize);
+
+            var customers = await connection.QueryAsync<Customers>(query, param: parameters, commandType: CommandType.StoredProcedure);
+            return customers;
+        }
+
+        public async Task<int> CountAsync()
+        {
+            using var connection = _context.CreateConnection();
+            var query = "SELECT COUNT(*) FROM Customers";
+
+            var count = await connection.ExecuteScalarAsync<int>(query, commandType: CommandType.Text);
+            return count;
         }
 
         #endregion
