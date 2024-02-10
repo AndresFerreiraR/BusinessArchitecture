@@ -999,3 +999,9 @@ ver repositorio
 ## Refactorizacion del codigo .Net 6 ##
 
 desde la version .Net 6 en los proyctos de tipo API web, no existe el archivo Startup.cs, se refactorizara el codigo eliminando el archivo y colocando la logica en program.cs
+
+ver repositorio
+
+## Logger y Dashboard ##
+
+Ver la implementacion en repo
