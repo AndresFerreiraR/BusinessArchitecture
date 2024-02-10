@@ -1,3 +1,5 @@
+
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualBasic;
@@ -15,12 +17,12 @@ namespace Pacagroup.Ecommerce.Application.Test
         /// Nos permite almacenar la configuracion del entorno de ejecucion de pruebas basicamente
         /// Toda la configuracion contenida en el archivo appsettings.json
         /// </summary>
-        private static IConfiguration _configuration;
+        private static WebApplicationFactory<Program> _factory = null;
 
         /// <summary>
         /// Esta interfaz nos permite crear diferentes servicios dentro de un alcance local
         /// </summary>
-        private static IServiceScopeFactory _scopeFactory;
+        private static IServiceScopeFactory _scopeFactory = null;
 
         /// <summary>
         /// Este atributo o decorador "[ClassInitialize]" nos permite identificar un metodo que contiene 
@@ -32,20 +34,8 @@ namespace Pacagroup.Ecommerce.Application.Test
         [ClassInitialize]
         public static void Initialize(TestContext _)
         {
-            /// Cargamos toda la configuracion del archivo appsettings.json
-            var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", true, true)
-                              .AddEnvironmentVariables();
-            // Se asigna la configuracion en la variable _configuration
-            _configuration = builder.Build();
-
-            /// Instanciamos la calse Startup de la clase Services.API y le pasamos la configuracion
-            var startup = new Startup(_configuration);
-
-            var services = new ServiceCollection();
-            startup.ConfigureServices(services);
-            _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
+            _factory = new CustomWebApplicationFactory();
+            _scopeFactory = _factory.Services.GetService<IServiceScopeFactory>();
         }
 
         [TestMethod]

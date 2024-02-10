@@ -995,3 +995,7 @@ ver repositorio
     • Imaginate tener millones de resultados en la base de datos y que su aplicacion intente devolverlos todos a la vez, No solo seria una forma extremadamente ineficaz de devolver los resultados, sino que tamnien podria tener efectos devastadores en la misma aplicacion o en el hardware en el que se ejecuta.
     • Ademas se debe considerar que cada cliente tiene recursos en memoria limitados y necesita restringir la cantidad de resultados mostrados.
     • por lo tanto necesitamos una forma de devolver un numero determinado de resultados al cliente para evitar estas consecuencias.
+
+## Refactorizacion del codigo .Net 6 ##
+
+desde la version .Net 6 en los proyctos de tipo API web, no existe el archivo Startup.cs, se refactorizara el codigo eliminando el archivo y colocando la logica en program.cs

@@ -6,6 +6,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>E:\Cursos\Udeny\BusinessArchitecture\Pacagroup.Ecommerce.Services.WebApi\Pacagroup.Ecommerce.Services.WebApi.xml</DocumentationFile>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
