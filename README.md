@@ -1005,3 +1005,7 @@ ver repositorio
 ## Logger y Dashboard ##
 
 Ver la implementacion en repo
+
+## Actualizacion de .Net 7 ##
+
+Ver la implementacion en repo
