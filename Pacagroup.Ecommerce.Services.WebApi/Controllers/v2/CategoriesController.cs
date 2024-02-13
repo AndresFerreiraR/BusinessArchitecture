@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Pacagroup.Ecommerce.Application.Interface;
 
 namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
 {
     [Authorize]
+    [EnableRateLimiting("fixedWindow")]
     [ApiController]
     [Route("api/v{version:apiVersion}[controller]")]
     [ApiVersion("2.0")]

@@ -1025,4 +1025,38 @@ Almacenamiento de cahe distribuido.
   • ASP Net Core 7 admite diferentes tipos de implementaciones de cahe distribuida (redis, NCache, SqlServer Cache, Memoria distribuida) y es muy facil cambiar la implementacion en cualquier momento.
   • Independientemente de la implementacion que elijamos, para trabajar con la chache distribuida, siempre usamos la interfaz IDistributedCache.
 
-  
+  ## Patron Rate Limiting ##
+
+  1. Patron rate limiting (limite de velocidad)
+
+    • Contexto
+      • API con varias operaciones.
+      • Los clientes/consumidores de la API se han reistrado con el proveedor de la API
+      • Terminos y condiciones que rigen el uso y consumo de la API.
+      • Entidades gubernamentales que entregan servicios de datos.
+      • Periodo de prueba.
+
+    • Problema
+      • ¿Cómo puede el proveedor de la API evitar que los clientes de la API hagan un uso excesivo de la API?
+
+    • Escenarios donde es efectivo
+      • Aspectos económicos.
+      • Performace
+      • Fiabilidad / confiabilidad
+      • impacto y gravedad
+      • Conciencia del cliente
+
+    • Solucion
+      • Introducir y hacer cumplir un limite de velicidad (rate limiting) para protegerse contra los ataques o clientes de API que hacen uso excesivo de la API
+
+  2. Algoritmos rate limiting
+
+    • Algoritmos
+
+      • Fixed Window: Permite aplicar limites como "60 solicitudes por minuto". Dutante cada minuto se pueden realizar 60 solicitudes. Uno cada segundo, pero tambien 60 de una sola vez
+
+      • Sliding Window: Piense en "60 solicitudes por minuto, con 1 solicitud por segundo".
+
+      • Token bucket: piense "te dan 100 solicitudes cada minuto". Si los hacen todos en 10 segundos, tendrá que esperar 1 minuto antes de que se le permitan mas solicitudes.
+
+      • Concurrency: Es la forma mas simple de limitacion de velocidad. No mira el tiempo, solo el numero de solicitudes simultaneas. "Permitir 10 solicitudes simultaneas".
