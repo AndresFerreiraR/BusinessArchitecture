@@ -9,6 +9,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.HealthCheck
         {
             services.AddHealthChecks()
                 .AddSqlServer(configuration.GetConnectionString("NorthwindConnection"), tags: new[] { "database" })
+                .AddRedis(configuration.GetConnectionString("RedisConnectionString"), tags: new[] { "cache" })
                 .AddCheck<HealthCheckCustom>("HealthCheckCustom", tags: new[] { "custom" });
 
 

@@ -1009,3 +1009,20 @@ Ver la implementacion en repo
 ## Actualizacion de .Net 7 ##
 
 Ver la implementacion en repo
+
+## Redis ## 
+
+Almacenamiento de cahe distribuido.
+
+ 1. El almacenamiento en cache distribuido.
+
+  • El alamacenamiento en cache distribuido es un mecanismo en el que mantenemos el cache como un servicio externo que puede usar varios servidores de aplicaciones.
+  • Una cahce distribuida es una cache compartida por varios sevidores de aplicaciones, que normalmente se mantienen como un servicio externo a los servidores de aplicacionse.
+  •Beneficios:
+    • Es coherente entre solicitudes a varios servidores
+    • Sobrevive a los reinicios del servidor y a las implemenmtaciones de aplicaciones
+    • No usa memoria local
+  • ASP Net Core 7 admite diferentes tipos de implementaciones de cahe distribuida (redis, NCache, SqlServer Cache, Memoria distribuida) y es muy facil cambiar la implementacion en cualquier momento.
+  • Independientemente de la implementacion que elijamos, para trabajar con la chache distribuida, siempre usamos la interfaz IDistributedCache.
+
+  

@@ -27,6 +27,9 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.Injection
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICategoriesDomain, CategoriesDomain>();
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            services.AddScoped<ICategoriesApplication, CategoriesApplication>();
 
             return services;
         }

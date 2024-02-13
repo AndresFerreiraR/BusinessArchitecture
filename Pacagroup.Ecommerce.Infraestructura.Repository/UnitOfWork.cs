@@ -7,11 +7,15 @@ namespace Pacagroup.Ecommerce.Infraestructura.Repository
         public ICustomersRepository Cutomers { get; }
 
         public IUsersRepository Users { get; }
+        public ICategoriesRepository Categories { get; }
 
-        public UnitOfWork(ICustomersRepository cutomers, IUsersRepository users)
+        public UnitOfWork(ICustomersRepository cutomers, 
+                          IUsersRepository users,
+                          ICategoriesRepository categories)
         {
             Cutomers = cutomers;
             Users = users;
+            Categories = categories;
         }
 
         public void Dispose()
