@@ -9,7 +9,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.Watch
             services.AddWatchDogServices(opt =>
             {
                 opt.SetExternalDbConnString = _configuration.GetConnectionString("NorthwindConnection");
-                opt.SqlDriverOption = WatchDog.src.Enums.WatchDogSqlDriverEnum.MSSQL;
+                opt.DbDriverOption = WatchDog.src.Enums.WatchDogDbDriverEnum.MSSQL;
                 opt.IsAutoClear = true;
                 opt.ClearTimeSchedule = WatchDog.src.Enums.WatchDogAutoClearScheduleEnum.Monthly;
             });

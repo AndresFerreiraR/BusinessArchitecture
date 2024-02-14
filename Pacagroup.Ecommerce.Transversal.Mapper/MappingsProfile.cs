@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Pacagroup.Ecommerce.Application.DTO;
 using Pacagroup.Ecommerce.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Pacagroup.Ecommerce.Transversal.Mapper
 {
@@ -11,9 +8,9 @@ namespace Pacagroup.Ecommerce.Transversal.Mapper
     {
         public MappingsProfile()
         {
-            CreateMap<Customers, CustomersDto>().ReverseMap();
-            CreateMap<Users, UsersDto>().ReverseMap();
-            CreateMap<Categories, CategoriesDto>().ReverseMap();
+            CreateMap<Customer, CustomerDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
         }
     }
 }

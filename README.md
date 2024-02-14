@@ -1060,3 +1060,25 @@ Almacenamiento de cahe distribuido.
       • Token bucket: piense "te dan 100 solicitudes cada minuto". Si los hacen todos en 10 segundos, tendrá que esperar 1 minuto antes de que se le permitan mas solicitudes.
 
       • Concurrency: Es la forma mas simple de limitacion de velocidad. No mira el tiempo, solo el numero de solicitudes simultaneas. "Permitir 10 solicitudes simultaneas".
+
+## Integrando patrones, Practicas y principios de arquitectura limpia ##
+
+  1. QUe es una arquitectura limpia?
+
+    • Independiente de framework o extensiones.
+    • Comprobable o testeable.
+    • Independiente de interfaz de usuario
+    • Independiente de la base de datos.
+    • Independiente de sistemas o agentes externos.
+
+  2. ¿Porque es importante una arquitectura limpia?
+
+    • Costo beneficio
+    • Minimiza el costo de mantenimiento
+    • Maximiza la entrega de valor al negocio
+    • Maximiza el ROI total
+  3. Esencial vs Detalle
+  4. Vista general de la arquitectura limpia
+  5. Regla de la dependencia
+
+  Migracion del proyecto a Arquitectura limpia ver repo

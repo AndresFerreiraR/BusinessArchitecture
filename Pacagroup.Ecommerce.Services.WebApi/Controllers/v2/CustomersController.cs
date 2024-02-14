@@ -4,7 +4,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Pacagroup.Ecommerce.Application.DTO;
-    using Pacagroup.Ecommerce.Application.Interface;
+    using Pacagroup.Ecommerce.Application.Interface.UseCases;
     using Pacagroup.Ecommerce.Domain.Entity;
     using System.Threading.Tasks;
 
@@ -24,7 +24,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         #region Métodos Sincronos
 
         [HttpPost("Insert")]
-        public IActionResult Insert([FromBody] CustomersDto customersDto)
+        public IActionResult Insert([FromBody] CustomerDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
@@ -35,7 +35,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         }
 
         [HttpPut("Update/{customerId}")]
-        public IActionResult Update(string customerId, [FromBody] CustomersDto customersDto)
+        public IActionResult Update(string customerId, [FromBody] CustomerDto customersDto)
         {
             var validacion = _customersApplication.Get(customerId);
             if (validacion.Data == null)
@@ -93,7 +93,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         #region Métodos Asíncronos
 
         [HttpPost("InsertAsync")]
-        public async Task<IActionResult> InsertAsync([FromBody] CustomersDto customersDto)
+        public async Task<IActionResult> InsertAsync([FromBody] CustomerDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
@@ -105,7 +105,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
 
 
         [HttpPut("UpdateAsync/{customerId}")]
-        public async Task<IActionResult> UpdateAsync(string customerId, [FromBody] CustomersDto customersDto)
+        public async Task<IActionResult> UpdateAsync(string customerId, [FromBody] CustomerDto customersDto)
         {
             var validacion = await _customersApplication.GetAsync(customerId);
             if (validacion.Data == null)
