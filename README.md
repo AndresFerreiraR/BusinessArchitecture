@@ -1082,3 +1082,10 @@ Almacenamiento de cahe distribuido.
   5. Regla de la dependencia
 
   Migracion del proyecto a Arquitectura limpia ver repo
+
+  ## Migrando proyectos .Net Standard to .Net 7 ##
+
+  para actualizar los proyectos debemos instalar y usar una herramienta, se ejecuta en comando "dotnet tool install -g upgrade-assistant" en powershell (como administrador), luego para actualizar el proyecto}
+  nos situamos en la ruta del proyecto y ejecutamos el comando "upgrade-assistant  upgrade <Nombre de la solucion>" seguir las instrucciones
+
+  Ver los cambios en el repo.
