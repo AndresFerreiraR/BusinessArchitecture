@@ -1089,3 +1089,16 @@ Almacenamiento de cahe distribuido.
   nos situamos en la ruta del proyecto y ejecutamos el comando "upgrade-assistant  upgrade <Nombre de la solucion>" seguir las instrucciones
 
   Ver los cambios en el repo.
+
+  ## Entity Framework Core 7 y Arquitectura Limpia ##
+
+  ver en el repo.
+
+  • Entity Framework Core 7 (ORM)
+
+    • Es un moderno mapeador de objetos de base de datos para .Net 7
+    • Admite consultas Linq, seguimiento de cambios, actualizaciones y migraciones de esquemas.
+    • EF (entity Framework) funciona con SQL Server/Azure SQL Database, SQLite, Azure Cosmos DB, MySQL, PostgresSQL y muchas mas bases de datos.
+
+  • record: es un tipo de dato ligero e inmutable que tiene propiedades de solo lectura.
+  • seald: modificador que impide que se otras clases hereden de esta.

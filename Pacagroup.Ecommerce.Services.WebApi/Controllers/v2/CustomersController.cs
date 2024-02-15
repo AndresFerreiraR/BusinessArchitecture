@@ -5,7 +5,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
     using Microsoft.AspNetCore.Mvc;
     using Pacagroup.Ecommerce.Application.DTO;
     using Pacagroup.Ecommerce.Application.Interface.UseCases;
-    using Pacagroup.Ecommerce.Domain.Entity;
+    using Pacagroup.Ecommerce.Domain;
     using System.Threading.Tasks;
 
     [Authorize]
