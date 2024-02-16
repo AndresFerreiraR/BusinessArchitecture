@@ -1102,3 +1102,67 @@ Almacenamiento de cahe distribuido.
 
   • record: es un tipo de dato ligero e inmutable que tiene propiedades de solo lectura.
   • seald: modificador que impide que se otras clases hereden de esta.
+
+## Comunicacion entre microservicios basada en eventos usando RabbitMQ ##
+
+  1. Fundamentos
+
+    • Caso de uso: Escenarios cuando no necesita respuseta.
+
+      "Utíl cuando solo se requiere comunicar o informar que <Algo sucedio>. No se esta solicitando ni pidiendo nada por lo que no necesita una respuesta.
+
+        • Un usuario acaba de registrarse
+        • Tienes un nuevo seguidor
+        • Tu nevera esta casi vacia.
+
+      En ciertos escenarios, junto con el evento es posible que se requiera enviar informacion adicional (Carga util del evento / Carga util del mensaje)
+
+        • Usuario acaba de registrarse: nombre, correo, edad, etc
+        • Tienes un nuevo seguidor: nombre, nombre de usuario, foto, etc.
+        • tu nevera esta casi vacia: valumen disponible 25%
+
+  2. Patron Publish-Subscriber
+
+    Permite que una aplicacion anuncie eventos a varios consumidores interesados de forma asincrona sin vincular a los remitentes con los receptores.
+
+    Contexto y problema
+      • En las aplicaciones distribuidas o basadas en microservicios, a menudo los componentes del sistema necesitan proporcionar informacion a otros componentes a medida que ocurren los eventos.
+      • La mensajeria asincrona es una forma efectiva de desvincular a los pulicadores de los consumidores y evitar bloquear al publicador para esperar una respuesta.
+
+    Solucion: 
+      Introducin un sistema de mensajeria asincrona que incluya lo siguiente:
+        • Message broker: Es un intermediario de mensajes, es una pieza de infraestructura que se encarga de recibir mensajes y entregarlos a quienes demuesrtan interes (suscriptores)
+        • Publisher: Tambien conocido como productor, es una aplicacion que envia mensajes al brocker.
+        • Suscriber: tambien conocido como el consumidor, es una aplicacion que se conecta al brocker manifiesta interes en ciertos tipos de mensajes y deja la conexion abierta para que le brocker pueda enviar mensajes
+        • Mensaje: Es una pieza de informacion que los productores envian al broker y que reciben todos los consumidores interesados, el contenido del mensaje puede ser cualquier cosa, generalmente se catalogna como eventos o comandos. Los eventos comunican que ocurrio un hecho en tiempo pasado mientas que los comandos indican a los consumidores haz esto (ejecuta una accion). Los eventos y comandos comparten la misma estructura pero difieren conceptualmente.
+        • Canales: Los brokers admiten comunicacion a traves de multiples canales se les conoce como topics, routing keys, colas, event types entre otros.
+
+    Beneficios:
+      • Desacopla los subsistemas que todavia necesitan comunicarse.
+      • Aumenta la escalabilidad y mejora la capacidad de respuesta del publicador.
+      • Mejora la fiabilidad: soporta cargas de trabajo paesadas y manejo de fallas.
+      • Permite el procesamiento diferido o programado
+      • Permite una integracion mas sencilla entre sistemas que utilizan diferentes plataformas, lenguajes de programacion o protocolos de comunicacion.
+      • Facilita los flujos de trabajo asincronos en toda la empresa.
+      • Mejora la capacidad de prueba
+      • Proporciona separacion de preocupaciones para sus aplicaciones
+
+      Cuando usar este patron
+
+        • Una aplicacion necesita transmitir informacion a un numero significativo de consumidores.
+        • Una aplicacion necesita comunicarse con una o mas aplicaciones o servicios desarrollados de forma independiente, que pueden usar diferentes plataformas, lenguajes de programacion y protocolos de comunicacion.
+        • Una aplicacion puede enviar informacion a los consumidores sin requerir respuestas en tiempo rea de los consumidores.
+        • Los sistemas que se estan integrando estan diseñados para soportar un eventual modelo de consistencia para sus datos.
+
+  • RabbitMq
+
+    Es un broker de mensajeria de codigo abierto distribuido y escalable, sirve como intermediario para la comunicacion eficiente entre productores y consumidores
+
+    RabbitMq se definen colas que van a almacenar los mensajes que envian los productores hasta que las aplicaciones consumidoras obtienen mensajes y lo procesan.
+
+    Tipos de intercambio:
+      • Direct: El mensaje se enruta a las colas cuya clave de enlace coincide exactamente con la clave de enrutamiento del mensaje.
+      • Topic: Se basa en la coincidencia de comodines entre la clave de enrutamiento y el patron de enrutamiento especificado en el enlace de cada cola
+      • Fanout: En este tipo de intercambio se enrutan los mensajes a todas las colas enrutadas a el.
+
+    docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
