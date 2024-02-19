@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.RateLimiting;
-using Pacagroup.Ecommerce.Application.Interface.UseCases;
-
-namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
+﻿namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
 {
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.RateLimiting;
+    using Pacagroup.Ecommerce.Application.DTO;
+    using Pacagroup.Ecommerce.Application.Interface.UseCases;
+    using Pacagroup.Ecommerce.Transversal.Common;
+    using Swashbuckle.AspNetCore.Annotations;
+
+
     [Authorize]
     [EnableRateLimiting("fixedWindow")]
     [ApiController]
-    [Route("api/v{version:apiVersion}[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("2.0")]
+    [SwaggerTag("Get categories of products")]
     public class CategoriesController : Controller
     {
         private readonly ICategoriesApplication _categoriesApplication;
@@ -21,6 +26,12 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
         }
 
         [HttpGet("GetAll")]
+        [SwaggerOperation(Summary = "Get Categories", 
+                          Description = "This Endpoint will return all categories", 
+                          OperationId = "GeTAll", 
+                          Tags = new string[] { "GetAll"})]
+        [SwaggerResponse(200, "List of categories", typeof(Response<IEnumerable<CategoryDto>>))]
+        [SwaggerResponse(404, "Not found categories")]
         public async Task<IActionResult> GetAll()
         {
             var response = await _categoriesApplication.GetAll();

@@ -36,14 +36,23 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
     app.UseSwagger();
 
     app.UseSwaggerUI(c =>
     {
-        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
         foreach (var description in provider.ApiVersionDescriptions)
         {
             c.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToLowerInvariant());
+        }
+    });
+
+    app.UseReDoc(opt =>
+    {
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            opt.DocumentTitle = "Packagroup Technology services api market";
+            opt.SpecUrl = $"/swagger/{description.GroupName}/swagger.json";
         }
     });
 }
