@@ -77,6 +77,16 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
             return BadRequest(response.Message);
         }
 
+
+        [HttpGet("GetAllWithPaginationAsync")]
+        public async Task<IActionResult> GetAllWithPaginationAsync([FromQuery] int pageNumber, int pageSize)
+        {
+            var response = await _discountApplication.GetAllWithPagination(pageNumber, pageSize);
+            if (response.IsSuccess)
+                return Ok(response);
+            return BadRequest(response.Message);
+        }
+
         #endregion
 
     }

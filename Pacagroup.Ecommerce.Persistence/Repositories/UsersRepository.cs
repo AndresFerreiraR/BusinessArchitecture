@@ -4,6 +4,7 @@
     using Pacagroup.Ecommerce.Application.Interface.Persistence;
     using Pacagroup.Ecommerce.Domain.Entities;
     using Pacagroup.Ecommerce.Persistence.Context;
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -34,18 +35,25 @@
         /// <returns></returns>
         public User Authenticate(string userName, string password)
         {
-            using (var connection = _context.CreateConnection())
+            var user = new User();
+            try
             {
+                using var connection = _context.CreateConnection();
                 var query = "UsersGetByUserAndPassword";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("UserName", userName);
                 parameters.Add("Password", password);
 
-                var user = connection.QuerySingle<User>(query, param: parameters, commandType: System.Data.CommandType.StoredProcedure);
-
-                return user;
+                user = connection.QuerySingle<User>(query, param: parameters, commandType: System.Data.CommandType.StoredProcedure);
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return user;
         }
 
         public int Count()

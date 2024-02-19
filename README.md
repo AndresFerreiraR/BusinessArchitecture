@@ -1170,3 +1170,11 @@ Almacenamiento de cahe distribuido.
 ## Documentar API con Swagger y ReDog ##
 
 Ver codigo en repo
+
+## Generacion de datos fake utilizando bogus ##
+
+ver codigo en repo.
+
+  1. ¿Que es Bogus?
+
+    Es un simple generador de datos falsos para aplicaciones .Net, ayuda a poblar la base de datos con datos falsos, Ayuda a las aplicaciones a generar datos falsos con fines de pruebas, contribuye al desarrollo de aplicaciones con varios equipos trabajando en paralelo sobre metodologías agiles.
