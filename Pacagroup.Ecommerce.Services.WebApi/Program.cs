@@ -1,9 +1,9 @@
-﻿using HealthChecks.UI.Client;
+﻿using Asp.Versioning.ApiExplorer;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Pacagroup.Ecommerce.Application.UseCases;
-using Pacagroup.Ecommerce.Persistence;
 using Pacagroup.Ecommerce.Interface;
+using Pacagroup.Ecommerce.Persistence;
 using Pacagroup.Ecommerce.Services.WebApi.Modules.Authentication;
 using Pacagroup.Ecommerce.Services.WebApi.Modules.Feature;
 using Pacagroup.Ecommerce.Services.WebApi.Modules.HealthCheck;
@@ -12,8 +12,6 @@ using Pacagroup.Ecommerce.Services.WebApi.Modules.RateLimiter;
 using Pacagroup.Ecommerce.Services.WebApi.Modules.Redis;
 using Pacagroup.Ecommerce.Services.WebApi.Modules.Swagger;
 using Pacagroup.Ecommerce.Services.WebApi.Modules.Versioning;
-using Pacagroup.Ecommerce.Services.WebApi.Modules.Watch;
-using WatchDog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +25,6 @@ builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.AddVersioning();
 builder.Services.AddSwagger();
 builder.Services.AddHealthCheck(builder.Configuration);
-builder.Services.AddWatchDog(builder.Configuration);
 builder.Services.AddRedis(builder.Configuration);
 builder.Services.AddRateLimiting(builder.Configuration);
 
@@ -58,26 +55,18 @@ if (app.Environment.IsDevelopment())
 }
 var myPolicy = "PolicyApiEcommerce";
 
-app.UseWatchDogExceptionLogger();
+
 app.UseHttpsRedirection();
 app.UseCors(myPolicy);
-app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseRateLimiter();
-app.UseEndpoints(endpoints => { });
 app.MapControllers();
 app.MapHealthChecksUI();
 app.MapHealthChecks("/health", new HealthCheckOptions
 {
     Predicate = _ => true,
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-});
-
-app.UseWatchDog(conf =>
-{
-    conf.WatchPageUsername = builder.Configuration["WatchDog:WatchDogPageUserName"];
-    conf.WatchPagePassword = builder.Configuration["WatchDog:WatchDogPassword"];
 });
 
 app.Run();

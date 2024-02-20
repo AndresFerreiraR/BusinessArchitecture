@@ -1,6 +1,6 @@
 ﻿namespace Pacagroup.Ecommerce.Services.WebApi.Controllers.v2
 {
-
+    using Asp.Versioning;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.RateLimiting;

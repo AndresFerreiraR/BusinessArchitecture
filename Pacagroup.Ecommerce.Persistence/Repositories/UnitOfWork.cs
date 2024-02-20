@@ -16,13 +16,13 @@ namespace Pacagroup.Ecommerce.Persistence.Repositories
 
         private readonly ApplicationDbContext _dbContext;
 
-        public UnitOfWork(ICustomersRepository cutomers,
+        public UnitOfWork(ICustomersRepository customers,
                           IUsersRepository users,
                           ICategoriesRepository categories,
                           IDiscountRepository discount,
                           ApplicationDbContext dbContext)
         {
-            Customers = cutomers;
+            Customers = customers;
             Users = users;
             Categories = categories;
             Discount = discount;

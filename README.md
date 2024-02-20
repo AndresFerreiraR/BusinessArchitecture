@@ -1178,3 +1178,35 @@ ver codigo en repo.
   1. ¿Que es Bogus?
 
     Es un simple generador de datos falsos para aplicaciones .Net, ayuda a poblar la base de datos con datos falsos, Ayuda a las aplicaciones a generar datos falsos con fines de pruebas, contribuye al desarrollo de aplicaciones con varios equipos trabajando en paralelo sobre metodologías agiles.
+
+## Envio de correos electronicos con SendGrind ##
+
+Ver implementacion en el repo
+
+
+  1. Que es el patron Options?
+
+    El patron Options permite a los desarrolladores proporcionar accesos fuertemente tipados a grupos de configuraciones relacionadas. Es una forma ed vincular datos de configuracion jerárcicos a clases fuertemente tipadas.
+
+    Esto significa que puede definir una clase (SendGridOptions.cs) que represente un grupo de configuraciones relacionadas y luego usar el patron Options para vincular los valores del arhvio de configuracion (appsettings.json) a una instancia de dicha clase.
+
+## Actualizacion de paquetes Nuget ##
+
+Actualizcion de versioning y watch dog
+
+  1. Actualizacion de Versioning (ver codigo)
+
+  2. Deprecar paquete WatchDog
+
+    Motivaciones:
+
+    • Las Arquitecturas evolucionan constantemente y siempre se tienen que estar evaluando las prestaciones de los compoenentes que se utilizan.
+    • El componente WatchDog por su diseño produce conflicto con funcionalidades Middleware (health checks, Middlewares personalizdos) y pipelines en aplicaciones ASP.Net Core.
+    •Las actualizaciones son esporádicas. Aún no tiene una version estable para .Net 7
+    • Por diseño de arquitectura, la telemetría (Logging, Traces y Metrics) deben ser externalizadas a otras plataformas para sus analisis, exploracion y visualizacion y toma de decisiones. La aplicacion solo se debe centrar en implementar los reglas comerciales empresariales y los casos de uso del sistema.
+
+
+  • OpenTelemetry, tambien conocido como OTEL, es un marco de observabilidad de codigo abierto e independiente para instrumentar generar, recopilar y exportar datos de telemetria como trazas metricas y logs.
+  
+
+ver en el repo.

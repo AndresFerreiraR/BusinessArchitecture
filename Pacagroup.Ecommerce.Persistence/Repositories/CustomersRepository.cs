@@ -117,7 +117,7 @@ namespace Pacagroup.Ecommerce.Persistence.Repositories
         public int Count()
         {
             using var connection = _context.CreateConnection();
-            var query = "SELECT COUNT(*) FROM Customer";
+            var query = "SELECT COUNT(*) FROM Customers";
 
             var count = connection.ExecuteScalar<int>(query, commandType: CommandType.Text);
             return count;
@@ -229,7 +229,7 @@ namespace Pacagroup.Ecommerce.Persistence.Repositories
         public async Task<int> CountAsync()
         {
             using var connection = _context.CreateConnection();
-            var query = "SELECT COUNT(*) FROM Customer";
+            var query = "SELECT COUNT(*) FROM Customers";
 
             var count = await connection.ExecuteScalarAsync<int>(query, commandType: CommandType.Text);
             return count;
