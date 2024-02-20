@@ -1231,4 +1231,6 @@ ver en el repo.
     • Tiene acceso directo al contexto HTTP y pude operar en la solicutd u respuesta en un nivel inferior.
     El orden de ejecucion viene determinado por el orden en que se agregan los compoentes de middleware a la canalizacion en el archivo Program.cs
 
-  
+  ## Actualizacion a .Net 8 ##
+
+  ver repo

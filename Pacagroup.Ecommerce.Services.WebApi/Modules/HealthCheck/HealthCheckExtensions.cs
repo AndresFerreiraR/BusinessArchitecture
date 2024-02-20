@@ -13,7 +13,7 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.HealthCheck
                 .AddCheck<HealthCheckCustom>("HealthCheckCustom", tags: new[] { "custom" });
 
 
-            services.AddHealthChecksUI().AddInMemoryStorage();
+            services.AddHealthChecksUI().AddSqlServerStorage(configuration.GetConnectionString("NorthwindConnection"));
 
             return services;
         }

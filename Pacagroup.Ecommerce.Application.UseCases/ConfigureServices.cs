@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿
+using Microsoft.Extensions.DependencyInjection;
 using Pacagroup.Ecommerce.Application.Interface.UseCases;
 using Pacagroup.Ecommerce.Application.UseCases.Categories;
 using Pacagroup.Ecommerce.Application.UseCases.Customers;
@@ -13,7 +14,7 @@ namespace Pacagroup.Ecommerce.Application.UseCases
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(assemblies: Assembly.GetExecutingAssembly());
             services.AddScoped<ICustomersApplication, CustomersApplication>();
             services.AddScoped<IUsersApplication, UsersApplication>();
             services.AddScoped<ICategoriesApplication, CategoriesApplication>();
