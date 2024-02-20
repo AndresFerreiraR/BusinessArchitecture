@@ -1207,6 +1207,28 @@ Actualizcion de versioning y watch dog
 
 
   • OpenTelemetry, tambien conocido como OTEL, es un marco de observabilidad de codigo abierto e independiente para instrumentar generar, recopilar y exportar datos de telemetria como trazas metricas y logs.
-  
+
 
 ver en el repo.
+
+## Middleware en .Net Core ##
+
+ 1. Que es un middleware
+
+  El Middleware es un componente que se ensambla en una canalizacion de una aplicacion (pipeline) para controlar als solicitudes u las respuestas. Cada componente pude haer lo siguiente:
+
+    • Elegir si se pasa la solicitud al siguiente componente de la canalizacion.
+    • Realizar trabajos antes y después del siguiente componente de la canalizacion.
+
+  Los delegados de solicitudes se utilizan para crear la canalizacion de solicitudes. Los delegados de solicitudes manejan cada solicitud HTTP.
+
+  Conclusiones: 
+
+    • Opera en un nivel inferior y forma parte de la canalizacion de solicitudes.
+    • Se Ejecuta para cada solicitud y pude participar en el proceso de gestion de solicitudes de principio a fin.
+    • Aplicado globalmente a toda la aplicacion o condicionalmente a rutas especificas
+    • Se utiliza para manejar problemas transversales a nivel inferior, com olas excepciones, logs y validaciones.
+    • Tiene acceso directo al contexto HTTP y pude operar en la solicutd u respuesta en un nivel inferior.
+    El orden de ejecucion viene determinado por el orden en que se agregan los compoentes de middleware a la canalizacion en el archivo Program.cs
+
+  
