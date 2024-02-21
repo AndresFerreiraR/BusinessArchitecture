@@ -33,7 +33,7 @@
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public User Authenticate(string userName, string password)
+        public async Task<User> Authenticate(string userName, string password)
         {
             var user = new User();
             try
@@ -45,7 +45,7 @@
                 parameters.Add("UserName", userName);
                 parameters.Add("Password", password);
 
-                user = connection.QuerySingle<User>(query, param: parameters, commandType: System.Data.CommandType.StoredProcedure);
+                user = await connection.QuerySingleOrDefaultAsync<User>(query, param: parameters, commandType: System.Data.CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {

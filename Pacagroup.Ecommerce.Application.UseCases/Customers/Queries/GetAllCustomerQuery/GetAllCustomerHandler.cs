@@ -1,0 +1,46 @@
+﻿
+namespace Pacagroup.Ecommerce.Application.UseCases.Customers.Queries.GetAllCustomerQuery
+{
+    using AutoMapper;
+    using MediatR;
+    using Pacagroup.Ecommerce.Application.DTO;
+    using Pacagroup.Ecommerce.Application.Interface.Persistence;
+    using Pacagroup.Ecommerce.Transversal.Common;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+
+    public class GetAllCustomerHandler : IRequestHandler<GetAllCustomerQuery, Response<IEnumerable<CustomerDto>>>
+    {
+
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        private IAppLogger<CustomersApplication> _logger;
+
+
+        public GetAllCustomerHandler(IUnitOfWork unitOfWork,
+                                    IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+
+        public async Task<Response<IEnumerable<CustomerDto>>> Handle(GetAllCustomerQuery request, CancellationToken cancellationToken)
+        {
+            var response = new Response<IEnumerable<CustomerDto>>();
+
+            var customers = await _unitOfWork.Customers.GetAllAsync();
+            response.Data = _mapper.Map<IEnumerable<CustomerDto>>(customers);
+
+            if (response.Data != null)
+            {
+                response.IsSuccess = true;
+                response.Message = "Registros consultados exitosamente";
+            }
+
+            return response;
+        }
+    }
+}

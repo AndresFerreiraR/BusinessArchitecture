@@ -198,7 +198,7 @@ namespace Pacagroup.Ecommerce.Persistence.Repositories
                 var parameters = new DynamicParameters();
                 parameters.Add("CustomerID", customerId);
 
-                var result = await connection.QuerySingleAsync<Customer>(query, param: parameters, commandType: CommandType.StoredProcedure);
+                var result = await connection.QuerySingleOrDefaultAsync<Customer>(query, param: parameters, commandType: CommandType.StoredProcedure);
 
                 return result;
             }

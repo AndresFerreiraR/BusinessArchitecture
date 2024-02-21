@@ -1234,3 +1234,59 @@ ver en el repo.
   ## Actualizacion a .Net 8 ##
 
   ver repo
+
+  ## Implementacion patron CQRS ##
+
+  1. Que es el patron CQRS
+
+    • CQRS significa segregacion de responsabilidad de comandos yu consultas
+    • CQRS es un patron que separa las operaciones de lectura y escritura para un repositorio de datos
+    • La adopcion e implementacion de CQRS en su aplicacion puede maximizar su rendimiento, escalabilidad y seguridad.
+    • La Flexibilidad creada al migrar a CQRS permite que un sistema evolucione mejor con el tiempo y evita que los comandos de actualizacion causen conflictos de fusión a nivel de dominio.
+    
+  2. Contexto y problema
+
+    • En las arquitecturas tradicionales, se utiliza el mismo modelo de datos para consultar y actualizar una base de datos. Esto es simple y funciona bien para operaciones crud basicas. Sin embargo, en aplicaciones mas complejas, este enfoque puede resultar dificil de manejar.
+
+    • Las cargas de trabajo de lectura y escritura suelen ser asimetricas, con requisitos de escalay rendimiento muy diferentes.
+
+    • La gestión de la seguridad y los permisos puede volcerse compleja porque cada entidad esta sujeta a operaciones de lectura y escritura, lo que podria exponer datos en el contexto incorrecto.
+
+  3. Solucion
+
+    • Cqrs separa lecturas y escrituras en diferentes modelos utilizando comandos para insertar/actualizar datos y consulta para leer datos
+
+    • Commands: hacen una tarea, ,pdofocam el estado, no debería devolver un valor (idealmente)
+    • Queries: Responde una pregunta, no debe modificar el estado, siempre devuelve un valor.
+
+    • Tipos de arquitectura CQRS: 
+
+      • Base de datos unica (imagen28)
+      • Base de datos de escritura y lectura (imagen29)
+      • Event Sourcing (imagen30)
+
+  4. Consideraciones de implementacion
+
+    • Complejidad: La idea basica de CQRS es simple. Pero puede conducir a un diseño de aplicaciones mas complejo, especialmente si incluyen el patron event sourcing
+
+    • Mensajeria: Aunque CQRS no requiere mensajeria, es comun usar mensajeria para procesar comandos y publicar eventos de actualizacion.
+
+    • Consistencia eventual: si separa las bases de datos de lectura y escritura, los datos leidos pueden estar obsoletos.
+
+  5. Cuando usar CQRS
+
+    • Dominios colaborativos donde muchos usuarios acceden a los mismos datos en paralelo.
+    • Interfaces de usuario basadas en tareas donde los usuarios son guiados a traves de un proceso complejo como una serie de pasos o como modelos de dominio complejos.
+    • Escenarios en los que el rendimiento de las lecturas de datos deben ajustarse por separado del rendimiento de las escrituras de datos, especialmente cuando el número de lecturas es mucho mayor que el numero de escrituras.
+
+  6. Que es patron Mediador
+
+      • El patron de diseño Mediador se basa en un conjunto de principios y conceptos basicos que lo convierten en una herramienta eficaz para gestionar la comunicacion entre componentes.
+      • En esencia, el patron mediador promueve el principio de acoplamiento flexible al abstraer la logica de comunicacion en un objketo mediador. Este objeto actua como un eje central permitiendo que los componentes interactuen sin conocimiento directo entre si.
+      • Al encapsular la logica de interaccion, el patron Mediator simplifica el proceso de comunicacion y reduce las dependencias, lo que conlleva a una base de código mas modular y facil de mantener.
+
+  7. Contexto y problema
+
+  8. Solucion
+  9. consideraciones de implementacion
+  10. Cuando usar el patron mediador

@@ -14,6 +14,10 @@ namespace Pacagroup.Ecommerce.Application.UseCases
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+            });
             services.AddAutoMapper(assemblies: Assembly.GetExecutingAssembly());
             services.AddScoped<ICustomersApplication, CustomersApplication>();
             services.AddScoped<IUsersApplication, UsersApplication>();
@@ -22,6 +26,8 @@ namespace Pacagroup.Ecommerce.Application.UseCases
 
             services.AddTransient<UsersDtoValidator>();
             services.AddTransient<DiscountDtoValidator>();
+
+
 
             return services;
         }
