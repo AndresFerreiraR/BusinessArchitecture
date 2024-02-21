@@ -3,7 +3,6 @@ using Pacagroup.Ecommerce.Application.DTO;
 using Pacagroup.Ecommerce.Application.Interface.Infraestructure;
 using Pacagroup.Ecommerce.Application.Interface.Persistence;
 using Pacagroup.Ecommerce.Application.Interface.UseCases;
-using Pacagroup.Ecommerce.Application.Validator;
 using Pacagroup.Ecommerce.Domain.Entities;
 using Pacagroup.Ecommerce.Domain.Events;
 using Pacagroup.Ecommerce.Transversal.Common;
@@ -19,7 +18,6 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Discounts
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IEventBus _eventBus;
-        private readonly DiscountDtoValidator _discountDtoValidator;
 
         /// <summary>
         /// 
@@ -29,13 +27,11 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Discounts
         /// <param name="discountDtoValidator"></param>
         public DiscountApplication(IUnitOfWork unitOfWork,
                                    IMapper mapper,
-                                   IEventBus eventBus,
-                                   DiscountDtoValidator discountDtoValidator)
+                                   IEventBus eventBus)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _eventBus = eventBus;
-            _discountDtoValidator = discountDtoValidator;
         }
 
         /// <summary>
@@ -49,20 +45,11 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Discounts
             var response = new Response<bool>();
             try
             {
-                var validation = await _discountDtoValidator.ValidateAsync(discountDto, cancellationToken);
-
-                if(!validation.IsValid)
-                {
-                    response.Message = "Validation erros found";
-                    response.Errors = validation.Errors;
-                    return response;
-                }
-
                 var entidad = _mapper.Map<Discount>(discountDto);
 
                 var result = await _unitOfWork.Discount.InsertAsync(entidad);
 
-                response.Data = await _unitOfWork.Save(cancellationToken)>0;
+                response.Data = await _unitOfWork.Save(cancellationToken) > 0;
                 if (response.Data)
                 {
                     response.IsSuccess = true;
@@ -70,7 +57,7 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Discounts
                     var discoutCreateEvent = _mapper.Map<DiscountCreatedEvent>(entidad);
                     _eventBus.Publish(discoutCreateEvent);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -91,15 +78,6 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Discounts
             var response = new Response<bool>();
             try
             {
-                var validation = await _discountDtoValidator.ValidateAsync(discountDto, cancellationToken);
-
-                if (!validation.IsValid)
-                {
-                    response.Message = "Validation erros found";
-                    response.Errors = validation.Errors;
-                    return response;
-                }
-
                 var entidad = _mapper.Map<Discount>(discountDto);
 
                 var result = await _unitOfWork.Discount.UpdateAsync(entidad);
@@ -161,7 +139,7 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Discounts
             {
                 var discount = await _unitOfWork.Discount.GetAsync(id, cancellationToken);
 
-                if(discount is null)
+                if (discount is null)
                 {
                     response.IsSuccess = true;
                     response.Message = "Discount not found";

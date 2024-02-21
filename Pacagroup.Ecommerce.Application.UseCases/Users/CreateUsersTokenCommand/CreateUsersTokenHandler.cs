@@ -5,7 +5,6 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Users.CreateUsersTokenCommand
     using MediatR;
     using Pacagroup.Ecommerce.Application.DTO;
     using Pacagroup.Ecommerce.Application.Interface.Persistence;
-    using Pacagroup.Ecommerce.Application.Validator;
     using Pacagroup.Ecommerce.Transversal.Common;
     using System.Threading;
     using System.Threading.Tasks;
@@ -31,7 +30,7 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Users.CreateUsersTokenCommand
         {
             var response = new Response<UserDto>();
 
-            var user = await _unitOfWork.Users.Authenticate(request.UserName, request.password);
+            var user = await _unitOfWork.Users.Authenticate(request.UserName, request.Password);
             response.Data = _mapper.Map<UserDto>(user);
             response.IsSuccess = true;
             response.Message = "Authentication successful!!!";

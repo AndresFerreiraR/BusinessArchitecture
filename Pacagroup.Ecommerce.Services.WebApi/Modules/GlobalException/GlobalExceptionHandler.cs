@@ -1,11 +1,11 @@
 ﻿
-using k8s.KubeConfigModels;
-using Pacagroup.Ecommerce.Transversal.Common;
-using System.Net;
-using System.Text.Json;
-
 namespace Pacagroup.Ecommerce.Services.WebApi.Modules.GlobalException
 {
+    using Pacagroup.Ecommerce.Application.UseCases.Common.Exceptions;
+    using Pacagroup.Ecommerce.Transversal.Common;
+    using System.Net;
+    using System.Text.Json;
+
     public class GlobalExceptionHandler : IMiddleware
     {
         private readonly ILogger<GlobalExceptionHandler> _logger;
@@ -20,6 +20,12 @@ namespace Pacagroup.Ecommerce.Services.WebApi.Modules.GlobalException
             try
             {
                 await next(context);
+            }
+            catch (ValidationExceptionCustom ex)
+            {
+                context.Response.ContentType = "application/json";
+                await JsonSerializer.SerializeAsync(context.Response.Body,
+                        new Response<Object> { Message = "Validation Errors", Errors = ex.Errors });
             }
             catch (Exception ex)
             {

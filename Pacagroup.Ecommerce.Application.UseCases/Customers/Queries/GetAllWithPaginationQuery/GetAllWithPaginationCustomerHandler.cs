@@ -18,7 +18,6 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Customers.Queries.GetAllWithP
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private IAppLogger<CustomersApplication> _logger;
 
         /// <summary>
         /// 

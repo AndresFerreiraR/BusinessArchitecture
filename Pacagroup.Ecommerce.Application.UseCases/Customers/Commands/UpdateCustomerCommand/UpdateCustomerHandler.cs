@@ -21,8 +21,7 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Customers.Commands.UpdateCust
 
 
         public UpdateCustomerHandler(IUnitOfWork unitOfWork,
-                                    IMapper mapper,
-                                    IAppLogger<CustomersApplication> logger)
+                                    IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

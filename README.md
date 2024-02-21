@@ -1290,3 +1290,8 @@ ver en el repo.
   8. Solucion
   9. consideraciones de implementacion
   10. Cuando usar el patron mediador
+
+  Ver implemantacion en el codigo.
+
+  ## Middlewares y Behaviors en aplicaciones .Net 8 ##
+

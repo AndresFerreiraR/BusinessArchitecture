@@ -16,7 +16,6 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Customers.Queries.GetAllCusto
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private IAppLogger<CustomersApplication> _logger;
 
 
         public GetAllCustomerHandler(IUnitOfWork unitOfWork,

@@ -2,6 +2,7 @@
 namespace Pacagroup.Ecommerce.Application.UseCases.Customers
 {
     using AutoMapper;
+    using Microsoft.Extensions.Logging;
     using Pacagroup.Ecommerce.Application.DTO;
     using Pacagroup.Ecommerce.Application.Interface.Persistence;
     using Pacagroup.Ecommerce.Application.Interface.UseCases;
@@ -17,11 +18,11 @@ namespace Pacagroup.Ecommerce.Application.UseCases.Customers
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private IAppLogger<CustomersApplication> _logger;
+        private ILogger<CustomersApplication> _logger;
 
         public CustomersApplication(IUnitOfWork unitOfWork,
                                     IMapper mapper,
-                                    IAppLogger<CustomersApplication> logger)
+                                    ILogger<CustomersApplication> logger)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
